@@ -7,7 +7,7 @@
     keymap {
         compatible = "zmk,keymap";
         base_layer {
-            bindings =
+            bindings = <
                 &rc_00 &rc_01 &rc_02 &rc_03 &rc_04 &rc_05 &rc_06 &rc_07 &rc_08 &rc_09
                 &rc_10 &rc_11 &rc_12 &rc_13 &rc_14 &rc_15 &rc_16 &rc_17 &rc_18 &rc_19
                 &rc_30 &rc_20 &rc_21 &rc_22 &rc_23 &rc_24 &rc_25 &rc_26 &rc_27 &rc_28 &rc_29 &rc_39
