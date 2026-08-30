@@ -1,211 +1,314 @@
 #include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/outputs.h>
 
-// DIAGNOSTIC PIN MAPPER - each key types its raw matrix (row,col) as two digits.
-// Home-row F should type 13 (row 1, col 3 = D9). A types 10 (row 1, col 0 = D4).
+#define BASE 0
+#define NAV  1
+#define NUM  2
+#define SYM  3
+#define FN   4  /* was "F" — but F is the letter-F key code; shadowing it made home-row F type "a" (key code 4) */
+
+&mt {
+    quick-tap-ms = <100>;
+    global-quick-tap;
+    flavor = "tap-preferred";
+    tapping-term-ms = <255>;
+};
+
 / {
-    keymap {
-        compatible = "zmk,keymap";
-        base_layer {
-            bindings = <
-                &rc_00 &rc_01 &rc_02 &rc_03 &rc_04 &rc_05 &rc_06 &rc_07 &rc_08 &rc_09
-                &rc_10 &rc_11 &rc_12 &rc_13 &rc_14 &rc_15 &rc_16 &rc_17 &rc_18 &rc_19
-                &rc_30 &rc_20 &rc_21 &rc_22 &rc_23 &rc_24 &rc_25 &rc_26 &rc_27 &rc_28 &rc_29 &rc_39
-                &rc_32 &rc_33 &rc_34 &rc_35 &rc_36 &rc_37
-                >;
+    combos {
+        compatible = "zmk,combos";
+
+        combo_esc {
+            timeout-ms = <50>;
+            key-positions = <0 1>;
+            bindings = <&kp ESC>;
         };
     };
 
     macros {
-        rc_00: rc_00 {
+        copy: copy {
+            label = "COPY";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp N0 &kp N0>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&macro_tap>,
+                <&kp C>,
+                <&macro_release>,
+                <&kp LEFT_GUI>;
         };
-        rc_01: rc_01 {
+
+        paste: paste {
+            label = "PASTE";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp N0 &kp N1>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&macro_tap>,
+                <&kp V>,
+                <&macro_release>,
+                <&kp LEFT_GUI>;
         };
-        rc_02: rc_02 {
+
+        cut: cut {
+            label = "CUT";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp N0 &kp N2>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&macro_tap>,
+                <&kp X>,
+                <&macro_release>,
+                <&kp LEFT_GUI>;
         };
-        rc_03: rc_03 {
+
+        undo: undo {
+            label = "UNDO";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp N0 &kp N3>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&macro_tap>,
+                <&kp Z>,
+                <&macro_release>,
+                <&kp LEFT_GUI>;
         };
-        rc_04: rc_04 {
+
+        redo: redo {
+            label = "REDO";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp N0 &kp N4>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&kp LSHFT>,
+                <&macro_tap>,
+                <&kp Z>,
+                <&macro_release>,
+                <&kp LSHFT>,
+                <&kp LEFT_GUI>;
         };
-        rc_05: rc_05 {
+
+        screenshot: screenshot {
+            label = "SCREENSHOT";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp N0 &kp N5>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&kp LSHFT>,
+                <&macro_tap>,
+                <&kp N4>,
+                <&macro_release>,
+                <&kp LSHFT>,
+                <&kp LEFT_GUI>;
         };
-        rc_06: rc_06 {
+
+        spotlight: spotlight {
+            label = "SPOTLIGHT";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp N0 &kp N6>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&macro_tap>,
+                <&kp SPACE>,
+                <&macro_release>,
+                <&kp LEFT_GUI>;
         };
-        rc_07: rc_07 {
+
+        mission: mission {
+            label = "MISSION";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp N0 &kp N7>;
+            bindings =
+                <&macro_press>,
+                <&kp LCTRL>,
+                <&macro_tap>,
+                <&kp UP>,
+                <&macro_release>,
+                <&kp LCTRL>;
         };
-        rc_08: rc_08 {
+
+        appwin: appwin {
+            label = "APPWIN";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp N0 &kp N8>;
+            bindings =
+                <&macro_press>,
+                <&kp LCTRL>,
+                <&macro_tap>,
+                <&kp DOWN>,
+                <&macro_release>,
+                <&kp LCTRL>;
         };
-        rc_09: rc_09 {
+
+        lock: lock {
+            label = "LOCK";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp N0 &kp N9>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&kp LCTRL>,
+                <&macro_tap>,
+                <&kp Q>,
+                <&macro_release>,
+                <&kp LCTRL>,
+                <&kp LEFT_GUI>;
         };
-        rc_10: rc_10 {
+
+        emoji: emoji {
+            label = "EMOJI";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp N1 &kp N0>;
+            bindings =
+                <&macro_press>,
+                <&kp LCTRL>,
+                <&kp LEFT_GUI>,
+                <&macro_tap>,
+                <&kp SPACE>,
+                <&macro_release>,
+                <&kp LEFT_GUI>,
+                <&kp LCTRL>;
         };
-        rc_11: rc_11 {
+
+        fullshot: fullshot {
+            label = "FULLSHOT";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp N1 &kp N1>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&kp LSHFT>,
+                <&macro_tap>,
+                <&kp N3>,
+                <&macro_release>,
+                <&kp LSHFT>,
+                <&kp LEFT_GUI>;
         };
-        rc_12: rc_12 {
+
+        clipshot: clipshot {
+            label = "CLIPSHOT";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp N1 &kp N2>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&kp LCTRL>,
+                <&kp LSHFT>,
+                <&macro_tap>,
+                <&kp N4>,
+                <&macro_release>,
+                <&kp LSHFT>,
+                <&kp LCTRL>,
+                <&kp LEFT_GUI>;
         };
-        rc_13: rc_13 {
+
+        prevspc: prevspc {
+            label = "PREVSPC";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp N1 &kp N3>;
+            bindings =
+                <&macro_press>,
+                <&kp LCTRL>,
+                <&macro_tap>,
+                <&kp LEFT>,
+                <&macro_release>,
+                <&kp LCTRL>;
         };
-        rc_14: rc_14 {
+
+        nextspc: nextspc {
+            label = "NEXTSPC";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp N1 &kp N4>;
+            bindings =
+                <&macro_press>,
+                <&kp LCTRL>,
+                <&macro_tap>,
+                <&kp RIGHT>,
+                <&macro_release>,
+                <&kp LCTRL>;
         };
-        rc_15: rc_15 {
+
+        forcequit: forcequit {
+            label = "FORCEQUIT";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp N1 &kp N5>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&kp LALT>,
+                <&macro_tap>,
+                <&kp ESC>,
+                <&macro_release>,
+                <&kp LALT>,
+                <&kp LEFT_GUI>;
         };
-        rc_16: rc_16 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N1 &kp N6>;
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        base_layer {
+            label = "BASE";
+
+            bindings = <
+                &kp Q        &kp W       &kp E             &kp R           &kp T        &kp Y        &kp U             &kp I             &kp O       &kp P
+                &mt LCTRL A  &mt LALT S  &mt LEFT_SHIFT D  &mt LEFT_GUI F  &kp G        &kp H        &mt RIGHT_META J  &mt LEFT_SHIFT K  &mt RALT L  &mt LCTRL SEMICOLON
+                &mt F24 CAPS  &kp Z       &kp X             &kp C           &kp V        &kp B        &kp N             &kp M             &kp COMMA   &kp DOT     &kp FSLH   &kp SQT
+                                                     &kp ESCAPE   &lt 1 SPACE    &kp TAB    &lt 3 ENTER   &lt 2 BACKSPACE   &lt 4 DELETE
+            >;
         };
-        rc_17: rc_17 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N1 &kp N7>;
+
+        nav_layer {
+            label = "NAV";
+
+            bindings = <
+                &kp ESC      &bt BT_CLR  &kp UP    &kp EQUAL  &kp LBRC    &copy         &kp PG_UP       &kp UP_ARROW    &kp PAGE_DOWN  &kp KP_PLUS
+                &kp LSHFT    &kp LEFT    &kp DOWN  &kp RIGHT  &kp LBKT    &paste        &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT      &kp KP_MINUS
+                &screenshot  &kp DEL     &kp PG_UP &kp CAPS   &kp PG_DN   &kp LPAR      &undo          &kp HOME        &kp CAPS       &kp END       &redo    &cut
+                                                     &trans      &trans      &trans     &kp ENTER     &kp BACKSPACE    &kp DEL
+            >;
         };
-        rc_18: rc_18 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N1 &kp N8>;
+
+        num_layer {
+            label = "NUM";
+
+            bindings = <
+                &kp LEFT_BRACKET  &kp N7        &kp N8        &kp N9        &kp RIGHT_BRACKET   &kp CARET     &kp AMPS        &kp RA(U)   &kp SQT     &kp DQT
+                &kp SEMICOLON     &kp NUMBER_4  &kp N5        &kp NUMBER_6  &kp EQUAL           &kp C_MUTE    &kp LS(RA(N4))  &kp RA(N5)  &kp RA(N4)  &kp RA(O)
+                &trans            &kp GRAVE     &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3        &kp NON_US_BACKSLASH  &kp C_VOL_DN  &kp C_VOL_UP  &kp C_PREV  &kp C_NEXT  &kp BSLH   &trans
+                                                              &kp PERIOD    &kp N0        &kp MINUS           &trans        &kp C_PP        &trans
+            >;
         };
-        rc_19: rc_19 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N1 &kp N9>;
+
+        sym_layer {
+            label = "SYM";
+
+            bindings = <
+                &kp LEFT_BRACE  &kp AMPERSAND  &kp ASTERISK  &kp LEFT_PARENTHESIS  &kp RIGHT_BRACE  &spotlight  &mission  &appwin  &lock  &emoji
+                &kp COLON       &kp DOLLAR     &kp PERCENT   &kp CARET            &kp PLUS         &fullshot   &clipshot  &prevspc  &nextspc  &forcequit
+                &trans          &kp TILDE      &kp EXCLAMATION  &kp AT_SIGN        &kp HASH         &kp PIPE  &kp C_BRI_DN  &kp C_BRI_UP  &trans  &trans  &trans  &trans
+                                                              &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp UNDERSCORE  &trans  &trans  &trans
+            >;
         };
-        rc_30: rc_30 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N3 &kp N0>;
-        };
-        rc_20: rc_20 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N2 &kp N0>;
-        };
-        rc_21: rc_21 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N2 &kp N1>;
-        };
-        rc_22: rc_22 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N2 &kp N2>;
-        };
-        rc_23: rc_23 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N2 &kp N3>;
-        };
-        rc_24: rc_24 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N2 &kp N4>;
-        };
-        rc_25: rc_25 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N2 &kp N5>;
-        };
-        rc_26: rc_26 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N2 &kp N6>;
-        };
-        rc_27: rc_27 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N2 &kp N7>;
-        };
-        rc_28: rc_28 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N2 &kp N8>;
-        };
-        rc_29: rc_29 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N2 &kp N9>;
-        };
-        rc_39: rc_39 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N3 &kp N9>;
-        };
-        rc_32: rc_32 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N3 &kp N2>;
-        };
-        rc_33: rc_33 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N3 &kp N3>;
-        };
-        rc_34: rc_34 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N3 &kp N4>;
-        };
-        rc_35: rc_35 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N3 &kp N5>;
-        };
-        rc_36: rc_36 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N3 &kp N6>;
-        };
-        rc_37: rc_37 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N3 &kp N7>;
+
+        func_layer {
+            label = "F";
+
+            bindings = <
+                &kp F1   &kp F2   &kp F3   &kp F4   &kp F5    &kp F6   &kp F7   &kp F8   &kp F9   &kp F10
+                &kp F11  &kp F12  &kp F13  &kp F14  &kp F15   &kp F16  &kp F17  &kp F18  &kp F19  &kp F20
+                &trans   &kp F21  &kp F22  &kp F23  &kp F24   &trans   &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_NXT
+                                                     &trans    &trans   &trans    &trans   &trans    &trans
+            >;
         };
     };
 };
