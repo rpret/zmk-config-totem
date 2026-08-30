@@ -109,6 +109,148 @@
                 <&kp LSHFT>,
                 <&kp LEFT_GUI>;
         };
+
+        spotlight: spotlight {
+            label = "SPOTLIGHT";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&macro_tap>,
+                <&kp SPACE>,
+                <&macro_release>,
+                <&kp LEFT_GUI>;
+        };
+
+        mission: mission {
+            label = "MISSION";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LCTRL>,
+                <&macro_tap>,
+                <&kp UP>,
+                <&macro_release>,
+                <&kp LCTRL>;
+        };
+
+        appwin: appwin {
+            label = "APPWIN";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LCTRL>,
+                <&macro_tap>,
+                <&kp DOWN>,
+                <&macro_release>,
+                <&kp LCTRL>;
+        };
+
+        lock: lock {
+            label = "LOCK";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&kp LCTRL>,
+                <&macro_tap>,
+                <&kp Q>,
+                <&macro_release>,
+                <&kp LCTRL>,
+                <&kp LEFT_GUI>;
+        };
+
+        emoji: emoji {
+            label = "EMOJI";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LCTRL>,
+                <&kp LEFT_GUI>,
+                <&macro_tap>,
+                <&kp SPACE>,
+                <&macro_release>,
+                <&kp LEFT_GUI>,
+                <&kp LCTRL>;
+        };
+
+        fullshot: fullshot {
+            label = "FULLSHOT";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&kp LSHFT>,
+                <&macro_tap>,
+                <&kp N3>,
+                <&macro_release>,
+                <&kp LSHFT>,
+                <&kp LEFT_GUI>;
+        };
+
+        clipshot: clipshot {
+            label = "CLIPSHOT";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&kp LCTRL>,
+                <&kp LSHFT>,
+                <&macro_tap>,
+                <&kp N4>,
+                <&macro_release>,
+                <&kp LSHFT>,
+                <&kp LCTRL>,
+                <&kp LEFT_GUI>;
+        };
+
+        prevspc: prevspc {
+            label = "PREVSPC";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LCTRL>,
+                <&macro_tap>,
+                <&kp LEFT>,
+                <&macro_release>,
+                <&kp LCTRL>;
+        };
+
+        nextspc: nextspc {
+            label = "NEXTSPC";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LCTRL>,
+                <&macro_tap>,
+                <&kp RIGHT>,
+                <&macro_release>,
+                <&kp LCTRL>;
+        };
+
+        forcequit: forcequit {
+            label = "FORCEQUIT";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&kp LALT>,
+                <&macro_tap>,
+                <&kp ESC>,
+                <&macro_release>,
+                <&kp LALT>,
+                <&kp LEFT_GUI>;
+        };
     };
 
     keymap {
@@ -151,9 +293,9 @@
             label = "SYM";
 
             bindings = <
-                &kp LEFT_BRACE  &kp AMPERSAND  &kp ASTERISK  &kp LEFT_PARENTHESIS  &kp RIGHT_BRACE  &trans  &trans  &trans  &trans  &trans
-                &kp COLON       &kp DOLLAR     &kp PERCENT   &kp CARET            &kp PLUS         &trans  &trans  &trans  &trans  &trans
-                &trans          &kp TILDE      &kp EXCLAMATION  &kp AT_SIGN        &kp HASH         &kp PIPE  &trans  &trans  &trans  &trans  &trans  &trans
+                &kp LEFT_BRACE  &kp AMPERSAND  &kp ASTERISK  &kp LEFT_PARENTHESIS  &kp RIGHT_BRACE  &spotlight  &mission  &appwin  &lock  &emoji
+                &kp COLON       &kp DOLLAR     &kp PERCENT   &kp CARET            &kp PLUS         &fullshot   &clipshot  &prevspc  &nextspc  &forcequit
+                &trans          &kp TILDE      &kp EXCLAMATION  &kp AT_SIGN        &kp HASH         &kp PIPE  &kp C_BRI_DN  &kp C_BRI_UP  &trans  &trans  &trans  &trans
                                                               &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp UNDERSCORE  &trans  &trans  &trans
             >;
         };
