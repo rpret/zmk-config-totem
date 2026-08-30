@@ -61,6 +61,88 @@
                 <&macro_tap>,
                 <&kp G &kp I &kp F>;
         };
+
+        copy: copy {
+            label = "COPY";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&macro_tap>,
+                <&kp C>,
+                <&macro_release>,
+                <&kp LEFT_GUI>;
+        };
+
+        paste: paste {
+            label = "PASTE";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&macro_tap>,
+                <&kp V>,
+                <&macro_release>,
+                <&kp LEFT_GUI>;
+        };
+
+        cut: cut {
+            label = "CUT";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&macro_tap>,
+                <&kp X>,
+                <&macro_release>,
+                <&kp LEFT_GUI>;
+        };
+
+        undo: undo {
+            label = "UNDO";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&macro_tap>,
+                <&kp Z>,
+                <&macro_release>,
+                <&kp LEFT_GUI>;
+        };
+
+        redo: redo {
+            label = "REDO";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&kp LSHFT>,
+                <&macro_tap>,
+                <&kp Z>,
+                <&macro_release>,
+                <&kp LSHFT>,
+                <&kp LEFT_GUI>;
+        };
+
+        screenshot: screenshot {
+            label = "SCREENSHOT";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&kp LSHFT>,
+                <&macro_tap>,
+                <&kp N4>,
+                <&macro_release>,
+                <&kp LSHFT>,
+                <&kp LEFT_GUI>;
+        };
     };
 
     keymap {
@@ -111,9 +193,9 @@
             //                                     \u2517\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u253b\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u253b\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u251b   \u2517\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u253b\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u253b\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u251b
 
             bindings = <
-                 &kp ESC    &bt BT_CLR  &kp UP    &kp EQUAL  &kp LBRC  &kp K_COPY   &kp PG_UP       &kp UP_ARROW    &kp PAGE_DOWN  &kp KP_PLUS
-                 &kp LSHFT  &kp LEFT    &kp DOWN  &kp RIGHT  &kp LBKT  &kp K_PASTE  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT      &kp KP_MINUS
-&kp PRINTSCREEN  &kp DEL    &kp PG_UP   &kp CAPS  &kp PG_DN  &kp LPAR  &kp K_UNDO   &kp HOME        &kp CAPS        &kp END        &kp K_REDO    &kp PRINTSCREEN
+                 &kp ESC    &bt BT_CLR  &kp UP    &kp EQUAL  &kp LBRC  &copy        &kp PG_UP       &kp UP_ARROW    &kp PAGE_DOWN  &kp KP_PLUS
+                 &kp LSHFT  &kp LEFT    &kp DOWN  &kp RIGHT  &kp LBKT  &paste       &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT      &kp KP_MINUS
+&screenshot       &kp DEL    &kp PG_UP   &kp CAPS  &kp PG_DN  &kp LPAR  &undo        &kp HOME        &kp CAPS        &kp END        &redo         &cut
                                         &trans    &trans     &trans    &kp ENTER    &kp BACKSPACE   &kp DEL
             >;
         };
